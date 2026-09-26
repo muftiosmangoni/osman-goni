@@ -133,16 +133,28 @@ export async function loadCustomization(): Promise<PortfolioCustomization> {
     data.profileImage === '/osman-cyan-bg.png' ||
     data.profileImage === '/osman_goni_real.jpg' ||
     data.profileImage === '/osman_exact_nobg.png' ||
+    data.profileImage === 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg' ||
     !data.profileImage
   ) {
-    data.profileImage = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
+    data.profileImage = 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg';
+  }
+
+  // Ensure user portrait never leaks into graphic design projects
+  let cleanedDesignProjects = data.designProjects && data.designProjects.length > 0 ? data.designProjects : DESIGN_PROJECTS;
+  if (Array.isArray(cleanedDesignProjects)) {
+    cleanedDesignProjects = cleanedDesignProjects.map((p: any) => {
+      if (p.image && (p.image.includes('zn-Qd-U.jpg') || p.image.includes('0w-OVi.jpg'))) {
+        return { ...p, image: 'https://i.postimg.cc/tC8JY1WP/osman-goni-3646-Ae.jpg' };
+      }
+      return p;
+    });
   }
 
   return {
     ...base,
     ...data,
     videoProjects: data.videoProjects && data.videoProjects.length > 0 ? data.videoProjects : VIDEO_PROJECTS,
-    designProjects: data.designProjects && data.designProjects.length > 0 ? data.designProjects : DESIGN_PROJECTS,
+    designProjects: cleanedDesignProjects,
     academicEducation: data.academicEducation || ACADEMIC_EDUCATION,
     skillTraining: data.skillTraining || SKILL_TRAINING,
     coreSkills: data.coreSkills && data.coreSkills.length >= 8 && data.coreSkills.some((s: any) => s.id === 'script-writing') ? data.coreSkills : CORE_SKILLS,

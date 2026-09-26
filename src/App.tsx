@@ -244,12 +244,12 @@ Selected Projects:
 
         <div className="relative flex items-end justify-center w-full max-w-6xl px-4 pointer-events-none z-10">
           <img
-            src={customization.profileImage || 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg'}
+            src={customization.profileImage || 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg'}
             alt="Osman Goni Profile"
             onError={(e) => {
               const target = e.currentTarget;
-              if (!target.src.includes('zn-Qd-U.jpg')) {
-                target.src = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
+              if (!target.src.includes('0w-OVi.jpg')) {
+                target.src = 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg';
               }
             }}
             className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom brightness-[0.90] contrast-100"

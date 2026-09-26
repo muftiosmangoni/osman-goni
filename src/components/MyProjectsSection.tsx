@@ -33,13 +33,13 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
   const [isMobileVideosExpanded, setIsMobileVideosExpanded] = useState(false);
   const [isMobileDesignsExpanded, setIsMobileDesignsExpanded] = useState(false);
 
-  // Desktop responsive cards per view: 2 on desktop for large, prominent, bold presentation (matching user request), or 3 when in wide screen
-  const [cardsPerView, setCardsPerView] = useState(2);
+  // Desktop responsive cards per view: 3 on desktop as requested ("একসাথে তিনটা দেখা যাবে")
+  const [cardsPerView, setCardsPerView] = useState(3);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1280) {
-        setCardsPerView(2); // 2 cards makes them significantly bigger and broader on PC
+      if (window.innerWidth >= 1024) {
+        setCardsPerView(3);
       } else if (window.innerWidth >= 768) {
         setCardsPerView(2);
       } else {
@@ -872,8 +872,8 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                               : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                           }`}
                         >
-                          {/* Image Box - Larger, broader and taller for desktop/PC display */}
-                          <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden bg-black flex items-center justify-center">
+                          {/* Image Box - balanced 4:3 display for graphic design showcase */}
+                          <div className="relative aspect-[4/3] overflow-hidden bg-black flex items-center justify-center">
                             <img
                               src={item.image}
                               alt={item.title}
