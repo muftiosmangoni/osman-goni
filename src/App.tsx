@@ -242,14 +242,14 @@ Selected Projects:
         {/* Ambient cyan backlight right behind the silhouette */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="relative flex items-end justify-center w-full max-w-5xl px-4 pointer-events-none z-10">
+        <div className="relative flex items-end justify-center w-full max-w-6xl px-4 pointer-events-none z-10">
           <img
-            src={customization.profileImage || '/osman_exact_nobg.png'}
+            src={customization.profileImage || 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg'}
             alt="Osman Goni Profile"
             onError={(e) => {
               const target = e.currentTarget;
-              if (!target.src.includes('osman_exact_nobg.png')) {
-                target.src = '/osman_exact_nobg.png';
+              if (!target.src.includes('zn-Qd-U.jpg')) {
+                target.src = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
               }
             }}
             className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom brightness-[0.90] contrast-100"

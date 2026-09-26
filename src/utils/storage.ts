@@ -132,9 +132,10 @@ export async function loadCustomization(): Promise<PortfolioCustomization> {
     data.profileImage === '/prut.jpg' ||
     data.profileImage === '/osman-cyan-bg.png' ||
     data.profileImage === '/osman_goni_real.jpg' ||
+    data.profileImage === '/osman_exact_nobg.png' ||
     !data.profileImage
   ) {
-    data.profileImage = '/osman_exact_nobg.png';
+    data.profileImage = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
   }
 
   return {

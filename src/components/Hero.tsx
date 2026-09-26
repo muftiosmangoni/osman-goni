@@ -59,11 +59,11 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-teal-300 to-cyan-500 shadow-[0_0_25px_rgba(6,182,212,0.55)]">
                 <div className="w-full h-full rounded-full overflow-hidden bg-[#04121c] relative">
                   <img
-                    src={customization.profileImage || '/osman_exact_nobg.png'}
+                    src={customization.profileImage || 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg'}
                     onError={(e) => {
                       const target = e.currentTarget;
-                      if (!target.src.includes('osman_exact_nobg.png')) {
-                        target.src = '/osman_exact_nobg.png';
+                      if (!target.src.includes('zn-Qd-U.jpg')) {
+                        target.src = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
                       }
                     }}
                     alt="Osman Goni"
@@ -308,11 +308,11 @@ export const Hero: React.FC<HeroProps> = ({
 
                   <img
                     id="hero-osman-goni-portrait"
-                    src={customization.profileImage || '/osman_exact_nobg.png'}
+                    src={customization.profileImage || 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg'}
                     onError={(e) => {
                       const target = e.currentTarget;
-                      if (!target.src.includes('osman_exact_nobg.png')) {
-                        target.src = '/osman_exact_nobg.png';
+                      if (!target.src.includes('zn-Qd-U.jpg')) {
+                        target.src = 'https://i.postimg.cc/kGvC3Vb9/zn-Qd-U.jpg';
                       }
                     }}
                     alt="Osman Goni - Creative Visualizer & Video Editor"

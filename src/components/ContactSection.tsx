@@ -107,23 +107,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
             3. Facebook (with Visit Facebook link)
             4. Instagram (with Visit Instagram link)
         */}
-        {/* Contact Channel Cards: Clean 2-column on mobile & balanced grid matching Screenshot 1 */}
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
+        {/* Contact Channel Cards: Clean, compact 3-column grid (2 rows on desktop, 2-col on mobile) with perfect alignment */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4 max-w-4xl mx-auto mb-6 sm:mb-8">
           
-          {/* Top Direct 1: Email Address */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(6,182,212,0.5)] duration-300 group cursor-pointer">
+          {/* Card 1: Direct Email */}
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-cyan-400 shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-black transition-all duration-300 shadow-md">
-                  <Mail className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="flex items-start justify-between gap-1 mb-1.5 sm:mb-2">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-cyan-400 shrink-0 group-hover:scale-105 group-hover:bg-cyan-500 group-hover:text-black transition-all shadow-sm">
+                  <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
                 <button
                   onClick={() => handleCopy(customization.email, 'email')}
-                  className="px-1.5 py-0.5 sm:p-1.5 rounded-lg border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-[9px] sm:text-xs flex items-center gap-1 font-mono hover:scale-105 active:scale-95 transition-all"
+                  className="px-1.5 py-0.5 rounded border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-[9px] sm:text-[10px] flex items-center gap-1 font-mono transition-all"
                   title="Copy email"
                 >
-                  {copiedType === 'email' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  <span className="hidden sm:inline">Copy</span>
+                  {copiedType === 'email' ? <Check className="w-2.5 h-2.5 text-emerald-400" /> : <Copy className="w-2.5 h-2.5" />}
+                  <span>{copiedType === 'email' ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
 
@@ -131,37 +131,37 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-cyan-400 transition-colors">
                   DIRECT EMAIL
                 </h4>
-                <a href={`mailto:${customization.email}`} className="text-[10px] sm:text-xs font-mono text-cyan-400 hover:underline truncate block">
+                <a href={`mailto:${customization.email}`} className="text-[9.5px] sm:text-[11px] font-mono text-cyan-400 hover:underline truncate block">
                   {customization.email}
                 </a>
               </div>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Official</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Official</span>
               <a
                 href={`mailto:${customization.email}`}
-                className="text-[10px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
                 Send Email →
               </a>
             </div>
           </div>
 
-          {/* Card 2: Phone */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(16,185,129,0.5)] duration-300 group cursor-pointer">
+          {/* Card 2: Direct Phone */}
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-md">
-                  <Phone className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="flex items-start justify-between gap-1 mb-1.5 sm:mb-2">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-black transition-all shadow-sm">
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
                 <button
                   onClick={() => handleCopy(customization.phone, 'phone')}
-                  className="px-1.5 py-0.5 sm:p-1.5 rounded-lg border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 text-[9px] sm:text-xs flex items-center gap-1 font-mono hover:scale-105 active:scale-95 transition-all"
+                  className="px-1.5 py-0.5 rounded border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 text-[9px] sm:text-[10px] flex items-center gap-1 font-mono transition-all"
                   title="Copy phone"
                 >
-                  {copiedType === 'phone' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  <span className="hidden sm:inline">Copy</span>
+                  {copiedType === 'phone' ? <Check className="w-2.5 h-2.5 text-emerald-400" /> : <Copy className="w-2.5 h-2.5" />}
+                  <span>{copiedType === 'phone' ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
 
@@ -169,184 +169,127 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">
                   DIRECT PHONE
                 </h4>
-                <a href={`tel:${customization.phone}`} className="text-[10px] sm:text-xs font-mono text-emerald-400 hover:underline truncate block">
+                <a href={`tel:${customization.phone}`} className="text-[9.5px] sm:text-[11px] font-mono text-emerald-400 hover:underline truncate block">
                   {customization.phone}
                 </a>
               </div>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Call</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Direct Call</span>
               <a
                 href={`tel:${customization.phone}`}
-                className="text-[10px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
                 Call Now →
               </a>
             </div>
           </div>
 
-          {/* Social Row 1: WhatsApp & Telegram */}
           {/* Card 3: WhatsApp */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(16,185,129,0.5)] duration-300 group cursor-pointer">
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 mb-2 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-md">
-                <Phone className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 mb-1.5 sm:mb-2 group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-black transition-all shadow-sm">
+                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">
                 WhatsApp
               </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
+              <p className="text-[9.5px] sm:text-[11px] text-slate-400 truncate font-mono">
                 {customization.phone}
               </p>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Chat</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Chat</span>
               <a
                 href={`https://wa.me/88${customization.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
                 WhatsApp →
               </a>
             </div>
           </div>
 
-          {/* Card 4: Telegram */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-sky-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(56,189,248,0.5)] duration-300 group cursor-pointer">
+          {/* Card 4: Facebook */}
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-blue-400 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-sky-400 mb-2 group-hover:scale-110 group-hover:bg-sky-400 group-hover:text-black transition-all duration-300 shadow-md">
-                <Send className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-sky-400 transition-colors">
-                Telegram
-              </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
-                {customization.phone}
-              </p>
-            </div>
-
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Direct</span>
-              <a
-                href={customization.telegramUrl || `https://t.me/+88${customization.phone}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
-              >
-                Telegram →
-              </a>
-            </div>
-          </div>
-
-          {/* Social Row 1: Facebook & YouTube */}
-          {/* Card: Facebook */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-blue-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] duration-300 group cursor-pointer">
-            <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-blue-400 mb-2 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-300 transition-all duration-300 shadow-md">
-                <Facebook className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-blue-400 mb-1.5 sm:mb-2 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                <Facebook className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-blue-400 transition-colors">
                 Facebook
               </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
+              <p className="text-[9.5px] sm:text-[11px] text-slate-400 truncate">
                 Osman Goni
               </p>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Profile</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Profile</span>
               <a
                 href={customization.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
                 Facebook →
               </a>
             </div>
           </div>
 
-          {/* Card: YouTube */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-red-500 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(239,68,68,0.5)] duration-300 group cursor-pointer">
+          {/* Card 5: YouTube */}
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-red-500 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-red-500 mb-2 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-400 transition-all duration-300 shadow-md">
-                <Youtube className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-red-500 mb-1.5 sm:mb-2 group-hover:scale-105 group-hover:bg-red-600 group-hover:text-white transition-all shadow-sm">
+                <Youtube className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-red-400 transition-colors">
                 YouTube
               </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
+              <p className="text-[9.5px] sm:text-[11px] text-slate-400 truncate font-mono">
                 @GoniEditor
               </p>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Channel</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Channel</span>
               <a
                 href={customization.youtubeUrl || 'https://www.youtube.com/@GoniEditor'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-red-400 hover:text-red-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-red-400 hover:text-red-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
-                Go to YouTube →
+                YouTube →
               </a>
             </div>
           </div>
 
-          {/* Social Row 2: Instagram and LinkedIn directly together in the center matching user instruction */}
-          {/* Card: Instagram */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-pink-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(236,72,153,0.5)] duration-300 group cursor-pointer">
+          {/* Card 6: Instagram */}
+          <div className="p-3 sm:p-4 rounded-xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-pink-400 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] duration-300 group cursor-pointer min-h-[130px] sm:min-h-[145px]">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-pink-400 mb-2 group-hover:scale-110 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-pink-500 group-hover:to-purple-500 group-hover:text-white group-hover:border-pink-300 transition-all duration-300 shadow-md">
-                <Instagram className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#082233] border border-[#134466] flex items-center justify-center text-pink-400 mb-1.5 sm:mb-2 group-hover:scale-105 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-pink-500 group-hover:to-purple-500 group-hover:text-white transition-all shadow-sm">
+                <Instagram className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-pink-400 transition-colors">
                 Instagram
               </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
+              <p className="text-[9.5px] sm:text-[11px] text-slate-400 truncate">
                 @mm.osmangoni
               </p>
             </div>
 
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Reels</span>
+            <div className="mt-2 pt-2 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[8.5px] sm:text-[10px] text-slate-500">Reels</span>
               <a
                 href={customization.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-pink-400 hover:text-pink-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+                className="text-[9.5px] sm:text-xs font-semibold text-pink-400 hover:text-pink-300 flex items-center gap-0.5 hover:translate-x-0.5 transition-transform"
               >
                 Instagram →
-              </a>
-            </div>
-          </div>
-
-          {/* Card: LinkedIn (Positioned directly beside/under Instagram, centered and balanced) */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-[#0a66c2] hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(10,102,194,0.5)] duration-300 group cursor-pointer">
-            <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-[#0a66c2] mb-2 group-hover:scale-110 group-hover:bg-[#0a66c2] group-hover:text-white group-hover:border-blue-300 transition-all duration-300 shadow-md">
-                <Linkedin className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#0a66c2] transition-colors">
-                LinkedIn
-              </h4>
-              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
-                osman-goni100
-              </p>
-            </div>
-
-            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
-              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Network</span>
-              <a
-                href={customization.linkedInUrl || 'https://www.linkedin.com/in/osman-goni100'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-[#0a66c2] hover:text-sky-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
-              >
-                LinkedIn →
               </a>
             </div>
           </div>
