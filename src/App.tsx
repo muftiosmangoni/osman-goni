@@ -81,33 +81,6 @@ export function App() {
     };
   }, []);
 
-  // Rising portrait state: activates strictly when user arrives at My Projects,
-  // stays visible throughout projects, video editing, graphics, and beyond,
-  // and vanishes cleanly when returning up to Home.
-  const [showProjectPortrait, setShowProjectPortrait] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const projectsEl = document.getElementById('projects');
-      if (projectsEl) {
-        const rect = projectsEl.getBoundingClientRect();
-        // Activate strictly when user enters My Projects section,
-        // and fade out cleanly before returning to Software Tools / Home
-        if (rect.top <= 140 && window.scrollY > 280) {
-          setShowProjectPortrait(true);
-        } else {
-          setShowProjectPortrait(false);
-        }
-      } else {
-        setShowProjectPortrait(window.scrollY > 350);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleSaveCustomization = async (updated: PortfolioCustomization) => {
     const forcedDark: PortfolioCustomization = { ...updated, themeMode: 'dark' as const };
     setCustomization(forcedDark);
@@ -225,51 +198,6 @@ Selected Projects:
         onDownloadCV={handleDownloadCV}
         onOpenAdmin={handleOpenAdmin}
       />
-
-      {/* Background Rising Profile Portrait (Theme Color & Grid Background, NO solid black) */}
-      <div
-        id="persistent-project-portrait"
-        aria-hidden="true"
-        className={`fixed inset-0 pointer-events-none z-10 flex items-end justify-center select-none transition-opacity duration-700 ease-in-out ${
-          showProjectPortrait
-            ? 'opacity-95 pointer-events-none'
-            : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Full Theme Color Background layer - rich cyan/teal atmosphere instead of black */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 90% 85% at 50% 65%, rgba(6, 182, 212, 0.32) 0%, rgba(8, 48, 70, 0.80) 40%, rgba(4, 22, 34, 0.95) 75%, rgba(2, 7, 9, 0.99) 100%)',
-          }}
-        />
-
-        {/* The Exact Theme Cyan Grid ("শেপ শেপ আকারে যে গড়গড় আঁকা আছে") on top of theme color */}
-        <div className="absolute inset-0 pointer-events-none project-screenshot-grid opacity-90" />
-
-        {/* Core luminous cyan backlight centered right behind silhouette */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[780px] h-[650px] bg-cyan-400/25 rounded-full blur-[130px] pointer-events-none" />
-
-        <div className="relative flex items-end justify-center w-full max-w-6xl px-4 pointer-events-none z-10">
-          <img
-            src={customization.profileImage || 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg'}
-            alt="Osman Goni Profile"
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (!target.src.includes('0w-OVi.jpg')) {
-                target.src = 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg';
-              }
-            }}
-            className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom"
-            style={{
-              mixBlendMode: 'screen',
-              filter: 'brightness(0.92)',
-              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
-            }}
-          />
-        </div>
-      </div>
 
       <main className="relative z-20">
         {/* Hero Section matching screenshot layout & typography */}
