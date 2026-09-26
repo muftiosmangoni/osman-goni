@@ -116,6 +116,8 @@ export async function loadCustomization(): Promise<PortfolioCustomization> {
     designProjects: DESIGN_PROJECTS,
     academicEducation: ACADEMIC_EDUCATION,
     skillTraining: SKILL_TRAINING,
+    coreSkills: CORE_SKILLS,
+    youtubeUrl: DEFAULT_CUSTOMIZATION.youtubeUrl || 'https://www.youtube.com/@GoniEditor',
     themeMode: 'dark',
     yearsExperience: '3 Months',
   };
@@ -142,6 +144,8 @@ export async function loadCustomization(): Promise<PortfolioCustomization> {
     designProjects: data.designProjects && data.designProjects.length > 0 ? data.designProjects : DESIGN_PROJECTS,
     academicEducation: data.academicEducation || ACADEMIC_EDUCATION,
     skillTraining: data.skillTraining || SKILL_TRAINING,
+    coreSkills: data.coreSkills && data.coreSkills.length >= 8 && data.coreSkills.some((s: any) => s.id === 'script-writing') ? data.coreSkills : CORE_SKILLS,
+    youtubeUrl: data.youtubeUrl || DEFAULT_CUSTOMIZATION.youtubeUrl || 'https://www.youtube.com/@GoniEditor',
     themeMode: 'dark',
   };
 }

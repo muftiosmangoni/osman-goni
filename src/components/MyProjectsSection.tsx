@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Sparkles, ChevronLeft, ChevronRight, X, Grid, Layers, Film, Palette, Maximize2, Minimize2, ExternalLink } from 'lucide-react';
+import { Play, Sparkles, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, X, Grid, Layers, Film, Palette, Maximize2, Minimize2, ExternalLink } from 'lucide-react';
 import { VIDEO_PROJECTS, DESIGN_PROJECTS } from '../data/portfolioData';
 import { VideoProject, DesignProject } from '../types';
+import { SoftwareToolsMarquee } from './SoftwareToolsMarquee';
 
 interface MyProjectsSectionProps {
   lang: 'bn' | 'en';
@@ -28,7 +29,11 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
   const [isVideoFullscreen, setIsVideoFullscreen] = useState(false);
   const videoPlayerContainerRef = useRef<HTMLDivElement>(null);
 
-  // Always show 3 cards per view (across desktop and mobile) as requested by user
+  // Mobile show 3 initially, with See All toggle
+  const [isMobileVideosExpanded, setIsMobileVideosExpanded] = useState(false);
+  const [isMobileDesignsExpanded, setIsMobileDesignsExpanded] = useState(false);
+
+  // Always show 3 cards per view on desktop as requested by user
   const [cardsPerView, setCardsPerView] = useState(3);
 
   useEffect(() => {
@@ -75,6 +80,8 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
   // Viewport tracking so anyone arriving sees the 1st video and 1st graphic first
   const [isVideosInView, setIsVideosInView] = useState(false);
   const [isDesignsInView, setIsDesignsInView] = useState(false);
+  const wasVideoInView = useRef(false);
+  const wasDesignInView = useRef(false);
 
   useEffect(() => {
     const handleScrollTracking = () => {
@@ -83,12 +90,14 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
       
       if (videoEl) {
         const vRect = videoEl.getBoundingClientRect();
-        // Considered in view when within active viewport bounds
-        setIsVideosInView(vRect.top < window.innerHeight && vRect.bottom > 80);
+        // Considered in active view when within primary viewport zone
+        const inView = vRect.top < window.innerHeight * 0.75 && vRect.bottom > 150;
+        setIsVideosInView(inView);
       }
       if (designEl) {
         const dRect = designEl.getBoundingClientRect();
-        setIsDesignsInView(dRect.top < window.innerHeight && dRect.bottom > 80);
+        const inView = dRect.top < window.innerHeight * 0.75 && dRect.bottom > 150;
+        setIsDesignsInView(inView);
       }
     };
 
@@ -96,6 +105,21 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
     handleScrollTracking();
     return () => window.removeEventListener('scroll', handleScrollTracking);
   }, []);
+
+  // Guarantee that whenever the user enters the video or design section, it always starts at the 1st item first
+  useEffect(() => {
+    if (isVideosInView && !wasVideoInView.current) {
+      setVideoIndex(0);
+    }
+    wasVideoInView.current = isVideosInView;
+  }, [isVideosInView]);
+
+  useEffect(() => {
+    if (isDesignsInView && !wasDesignInView.current) {
+      setDesignIndex(0);
+    }
+    wasDesignInView.current = isDesignsInView;
+  }, [isDesignsInView]);
 
   // Reset video carousel when filter changes
   useEffect(() => {
@@ -237,29 +261,37 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
           </h2>
         </div>
 
-        {/* Quick Clickable Switchers: Video Editing & Graphic Design */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <button
-            onClick={() => {
-              document.getElementById('video-editing-portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-            className="group flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold bg-[#061824] hover:bg-cyan-400 text-cyan-300 hover:text-black border border-cyan-500/40 hover:border-cyan-300 transition-all duration-300 cursor-pointer shadow-md active:scale-95"
-            title={lang === 'bn' ? 'ভিডিও এডিটিং সেকশনে যান' : 'Go to Video Editing'}
-          >
-            <Film className="w-3.5 h-3.5 text-cyan-400 group-hover:text-black transition-colors" />
-            <span>{lang === 'bn' ? 'ভিডিও এডিটিং' : 'Video Editing'}</span>
-          </button>
+        {/* Quick Clickable Switchers: Video Editing & Graphic Design with forward-leap and radiant glowing backlight */}
+        <div className="flex items-center justify-center gap-3 sm:gap-5 mb-6 sm:mb-8">
+          <div className="relative group">
+            {/* Radiant Glowing Lamp behind Video Editing Shape */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-400 via-teal-300 to-sky-400 rounded-full blur-lg opacity-0 group-hover:opacity-100 group-hover:scale-120 transition-all duration-400 pointer-events-none -z-10" />
+            <button
+              onClick={() => {
+                document.getElementById('video-editing-portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="relative flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-[#061824] hover:bg-cyan-400 text-cyan-300 hover:text-black border border-cyan-500/50 hover:border-cyan-300 transition-all duration-300 cursor-pointer shadow-lg hover:scale-110 hover:-translate-y-1.5 active:scale-95 hover:shadow-[0_0_30px_rgba(6,182,212,0.9)]"
+              title={lang === 'bn' ? 'ভিডিও এডিটিং সেকশনে যান' : 'Go to Video Editing'}
+            >
+              <Film className="w-4 h-4 text-cyan-400 group-hover:text-black group-hover:scale-110 transition-all" />
+              <span>{lang === 'bn' ? 'ভিডিও এডিটিং' : 'Video Editing'}</span>
+            </button>
+          </div>
 
-          <button
-            onClick={() => {
-              document.getElementById('graphic-design-portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-            className="group flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold bg-[#061824] hover:bg-cyan-400 text-cyan-300 hover:text-black border border-cyan-500/40 hover:border-cyan-300 transition-all duration-300 cursor-pointer shadow-md active:scale-95"
-            title={lang === 'bn' ? 'গ্রাফিক ডিজাইন সেকশনে যান' : 'Go to Graphic Design'}
-          >
-            <Palette className="w-3.5 h-3.5 text-cyan-400 group-hover:text-black transition-colors" />
-            <span>{lang === 'bn' ? 'গ্রাফিক ডিজাইন' : 'Graphic Design'}</span>
-          </button>
+          <div className="relative group">
+            {/* Radiant Glowing Lamp behind Graphic Design Shape */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-400 via-teal-300 to-sky-400 rounded-full blur-lg opacity-0 group-hover:opacity-100 group-hover:scale-120 transition-all duration-400 pointer-events-none -z-10" />
+            <button
+              onClick={() => {
+                document.getElementById('graphic-design-portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="relative flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-[#061824] hover:bg-cyan-400 text-cyan-300 hover:text-black border border-cyan-500/50 hover:border-cyan-300 transition-all duration-300 cursor-pointer shadow-lg hover:scale-110 hover:-translate-y-1.5 active:scale-95 hover:shadow-[0_0_30px_rgba(6,182,212,0.9)]"
+              title={lang === 'bn' ? 'গ্রাফিক ডিজাইন সেকশনে যান' : 'Go to Graphic Design'}
+            >
+              <Palette className="w-4 h-4 text-cyan-400 group-hover:text-black group-hover:scale-110 transition-all" />
+              <span>{lang === 'bn' ? 'গ্রাফিক ডিজাইন' : 'Graphic Design'}</span>
+            </button>
+          </div>
         </div>
 
         {/* ========================================================================= */}
@@ -319,6 +351,106 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
             </div>
           </div>
 
+          {/* ========================================================================= */}
+          {/* MOBILE VIEW: Videos stacked full-width one by one (3 initially, then See All) */}
+          {/* ========================================================================= */}
+          <div className="block md:hidden space-y-4">
+            {(isMobileVideosExpanded ? filteredVideos : filteredVideos.slice(0, 3)).map((video, idx) => (
+              <div
+                key={`mobile-video-${video.id}-${idx}`}
+                id={`mobile-video-card-${video.id}`}
+                onClick={() => setSelectedVideo(video)}
+                className={`w-full rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer shadow-xl ${
+                  isDark
+                    ? 'bg-[#05141e] border-[#113146] active:border-cyan-400'
+                    : 'bg-white border-slate-200 active:border-cyan-400'
+                }`}
+              >
+                {/* Full-width aspect-video Video Preview */}
+                <div className="relative aspect-video w-full overflow-hidden bg-black flex items-center justify-center">
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
+
+                  {/* Centered Glowing Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-cyan-500 text-black flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.8)] active:scale-95 transition-all">
+                      <Play className="w-6 h-6 fill-black ml-1 text-black" />
+                    </div>
+                  </div>
+
+                  <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-cyan-300">
+                    {lang === 'bn' && video.categoryLabelBn ? video.categoryLabelBn : video.categoryLabel}
+                  </span>
+
+                  <span className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded bg-black/90 text-[10px] font-mono text-slate-200 border border-white/10">
+                    {video.duration}
+                  </span>
+                </div>
+
+                {/* Video Info Details */}
+                <div className={`p-3.5 flex flex-col justify-between border-t ${
+                  isDark ? 'border-[#0e2738] bg-[#040e16]' : 'border-slate-100 bg-slate-50'
+                }`}>
+                  <div>
+                    <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                      <span className="font-mono text-cyan-400 font-bold">{video.client}</span>
+                      <span className="text-[10px] uppercase font-mono">{video.aspectRatio}</span>
+                    </div>
+                    <h3 className={`text-sm font-bold line-clamp-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      {lang === 'bn' && video.titleBn ? video.titleBn : video.title}
+                    </h3>
+                    {video.description && (
+                      <p className={`text-xs mt-1 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        {video.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2.5 border-t border-[#0e2738]/70">
+                    {video.toolsUsed?.map((tool) => (
+                      <span
+                        key={tool}
+                        className="px-2 py-0.5 rounded bg-[#081d2c] border border-[#133c57] text-[9.5px] text-cyan-300 font-mono"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Mobile "See All" / "See Less" Button */}
+            {filteredVideos.length > 3 && (
+              <div className="pt-2 flex justify-center">
+                <button
+                  onClick={() => setIsMobileVideosExpanded(!isMobileVideosExpanded)}
+                  className="w-full py-3 px-4 rounded-xl border border-cyan-500/40 bg-gradient-to-r from-[#071c2b] to-[#04121d] hover:bg-cyan-500/20 text-cyan-300 font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/50 active:scale-98 transition-all cursor-pointer"
+                >
+                  <span>
+                    {isMobileVideosExpanded
+                      ? (lang === 'bn' ? 'কম দেখুন (সংক্ষেপ করুন)' : 'See Less')
+                      : (lang === 'bn' ? `সি অল (সবগুলো ${filteredVideos.length}টি ভিডিও দেখুন)` : `See All (${filteredVideos.length} Videos)`)}
+                  </span>
+                  {isMobileVideosExpanded ? (
+                    <ChevronUp className="w-4 h-4 text-cyan-400" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-cyan-400" />
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* ========================================================================= */}
+          {/* DESKTOP VIEW: Carousel Sliding Track & Grid (Hidden on Mobile) */}
+          {/* ========================================================================= */}
+          <div className="hidden md:block">
             {/* Video Carousel Sliding Track (3 items at once, auto-scrolls every 4 seconds 1 by 1) */}
             {videoLayout === 'carousel' && (
               <div
@@ -343,9 +475,9 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                         <div
                           id={`video-carousel-card-${video.id}-${idx}`}
                           onClick={() => setSelectedVideo(video)}
-                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl ${
+                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
                             isDark
-                              ? 'bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:shadow-cyan-950/60'
+                              ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                               : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                           }`}
                         >
@@ -435,6 +567,24 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                     </button>
                   </div>
                 </div>
+
+                {/* User-Requested Go to YouTube Button directly under video carousel */}
+                <div className="flex items-center justify-center mt-6 sm:mt-8">
+                  <a
+                    id="video-section-goto-youtube-btn"
+                    href="https://www.youtube.com/@GoniEditor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative group flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-red-600 via-rose-600 to-red-500 hover:from-red-500 hover:to-rose-500 text-white font-black text-xs sm:text-sm tracking-wide shadow-xl shadow-red-600/30 hover:shadow-red-500/60 hover:scale-105 hover:-translate-y-1 active:scale-95 transition-all duration-300 border border-red-400/40 cursor-pointer"
+                    title={lang === 'bn' ? 'সরাসরি ইউটিউবে যান (@GoniEditor)' : 'Go to YouTube Channel (@GoniEditor)'}
+                  >
+                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                      <Play className="w-3 h-3 fill-white text-white ml-0.5" />
+                    </div>
+                    <span>{lang === 'bn' ? 'গো টু ইউটিউব (Go to YouTube)' : 'Go to YouTube (@GoniEditor)'}</span>
+                    <ExternalLink className="w-4 h-4 text-white/90 group-hover:translate-x-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
             )}
 
@@ -446,9 +596,9 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                     key={video.id}
                     id={`video-card-${video.id}`}
                     onClick={() => setSelectedVideo(video)}
-                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl ${
+                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
                       isDark
-                        ? 'bg-[#05141e] border-[#113146] hover:border-cyan-500/50 hover:shadow-cyan-950/50'
+                        ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                         : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                     }`}
                   >
@@ -511,6 +661,7 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
               </div>
             )}
           </div>
+        </div>
 
           {/* Glowing separator between Video and Graphics */}
           <div className="my-16 relative flex items-center justify-center">
@@ -583,8 +734,105 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
               </div>
             </div>
 
-            {/* Design Carousel Sliding Track (3 items at once, auto-scrolls every 2 seconds 1 by 1) */}
-            {designLayout === 'carousel' && (
+            {/* ========================================================================= */}
+            {/* MOBILE VIEW: Graphic Designs stacked full-width one by one (3 initially, then See All) */}
+            {/* ========================================================================= */}
+            <div className="block md:hidden space-y-4">
+              {(isMobileDesignsExpanded ? filteredDesigns : filteredDesigns.slice(0, 3)).map((item, idx) => (
+                <div
+                  key={`mobile-design-${item.id}-${idx}`}
+                  id={`mobile-design-card-${item.id}`}
+                  onClick={() => setSelectedDesign(item)}
+                  className={`w-full rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer shadow-xl ${
+                    isDark
+                      ? 'bg-[#05141e] border-[#113146] active:border-cyan-400'
+                      : 'bg-white border-slate-200 active:border-cyan-400'
+                  }`}
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20" />
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="px-3 py-1.5 rounded-full bg-cyan-500/90 text-black text-xs font-bold font-mono flex items-center gap-1.5 shadow-xl shadow-cyan-500/50">
+                        <Maximize2 className="w-3.5 h-3.5" />
+                        <span>{lang === 'bn' ? 'বড় করে দেখুন' : 'Full Preview'}</span>
+                      </span>
+                    </div>
+
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-cyan-300">
+                      {lang === 'bn' && item.categoryLabelBn ? item.categoryLabelBn : item.categoryLabel}
+                    </span>
+
+                    <span className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded bg-black/90 text-[10px] font-mono text-slate-300 border border-white/10">
+                      #{idx + 1}
+                    </span>
+                  </div>
+
+                  <div className={`p-3.5 flex flex-col justify-between border-t ${
+                    isDark ? 'border-[#0e2738] bg-[#040e16]' : 'border-slate-100 bg-slate-50'
+                  }`}>
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                        <span className="font-mono text-cyan-400 font-bold">{item.client || 'Osman Goni'}</span>
+                        <span className="text-[10px] font-mono uppercase">{item.dimensions}</span>
+                      </div>
+                      <h3 className={`text-sm font-bold line-clamp-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        {lang === 'bn' && item.titleBn ? item.titleBn : item.title}
+                      </h3>
+                      {item.description && (
+                        <p className={`text-xs mt-1 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2.5 border-t border-[#0e2738]/70">
+                      {item.toolsUsed?.map((tool) => (
+                        <span
+                          key={tool}
+                          className="px-2 py-0.5 rounded bg-[#081d2c] border border-[#133c57] text-[9.5px] text-cyan-300 font-mono"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {filteredDesigns.length > 3 && (
+                <div className="pt-2 flex justify-center">
+                  <button
+                    onClick={() => setIsMobileDesignsExpanded(!isMobileDesignsExpanded)}
+                    className="w-full py-3 px-4 rounded-xl border border-cyan-500/40 bg-gradient-to-r from-[#071c2b] to-[#04121d] hover:bg-cyan-500/20 text-cyan-300 font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/50 active:scale-98 transition-all cursor-pointer"
+                  >
+                    <span>
+                      {isMobileDesignsExpanded
+                        ? (lang === 'bn' ? 'কম দেখুন (সংক্ষেপ করুন)' : 'See Less')
+                        : (lang === 'bn' ? `সি অল (সবগুলো ${filteredDesigns.length}টি ডিজাইন দেখুন)` : `See All (${filteredDesigns.length} Designs)`)}
+                    </span>
+                    {isMobileDesignsExpanded ? (
+                      <ChevronUp className="w-4 h-4 text-cyan-400" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-cyan-400" />
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* ========================================================================= */}
+            {/* DESKTOP VIEW: Graphic Design Carousel Sliding Track & Grid (Hidden on Mobile) */}
+            {/* ========================================================================= */}
+            <div className="hidden md:block">
+              {/* Design Carousel Sliding Track (3 items at once, auto-scrolls every 2 seconds 1 by 1) */}
+              {designLayout === 'carousel' && (
               <div
                 className="relative"
                 onMouseEnter={() => setIsDesignHovered(true)}
@@ -607,9 +855,9 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                         <div
                           id={`carousel-design-card-${item.id}-${idx}`}
                           onClick={() => setSelectedDesign(item)}
-                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl ${
+                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
                             isDark
-                              ? 'bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:shadow-cyan-950/60'
+                              ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                               : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                           }`}
                         >
@@ -721,9 +969,9 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                     key={item.id}
                     id={`grid-design-card-${item.id}`}
                     onClick={() => setSelectedDesign(item)}
-                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl ${
+                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
                       isDark
-                        ? 'bg-[#05141e] border-[#113146] hover:border-cyan-500/50 hover:shadow-cyan-950/50'
+                        ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                         : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                     }`}
                   >
@@ -772,8 +1020,8 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                 ))}
               </div>
             )}
-
           </div>
+        </div>
 
       </div>
 

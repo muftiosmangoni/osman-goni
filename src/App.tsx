@@ -7,12 +7,14 @@ import { EducationSection } from './components/EducationSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { AdminPanel } from './components/AdminPanel';
+import { MobileBottomNav } from './components/MobileBottomNav';
+import { SoftwareToolsMarquee } from './components/SoftwareToolsMarquee';
 import { DEFAULT_CUSTOMIZATION, VIDEO_PROJECTS, DESIGN_PROJECTS, ACADEMIC_EDUCATION, SKILL_TRAINING, CORE_SKILLS } from './data/portfolioData';
 import { PortfolioCustomization } from './types';
 import { loadCustomization, saveCustomization } from './utils/storage';
 
 export function App() {
-  const [lang, setLang] = useState<'bn' | 'en'>('bn');
+  const [lang, setLang] = useState<'bn' | 'en'>('en');
   
   // Route state: true if URL is /admin, #admin, or ?admin
   const [isAdminRoute, setIsAdminRoute] = useState<boolean>(() => {
@@ -89,17 +91,15 @@ export function App() {
       const projectsEl = document.getElementById('projects');
       if (projectsEl) {
         const rect = projectsEl.getBoundingClientRect();
-        // Activate as soon as the user starts approaching/entering My Projects (rect.top <= window.innerHeight * 0.8)
-        // or has scrolled past the top (scrollY > 180).
-        // It stays fully active throughout all sections below My Projects.
-        // It cleanly deactivates when user returns back up into Home (scrollY < 120 and rect.top > 180).
-        if (rect.top <= window.innerHeight * 0.85 || window.scrollY > 200) {
+        // Activate strictly when user enters My Projects section,
+        // and fade out cleanly before returning to Software Tools / Home
+        if (rect.top <= 140 && window.scrollY > 280) {
           setShowProjectPortrait(true);
         } else {
           setShowProjectPortrait(false);
         }
       } else {
-        setShowProjectPortrait(window.scrollY > 200);
+        setShowProjectPortrait(window.scrollY > 350);
       }
     };
 
@@ -205,25 +205,16 @@ Selected Projects:
 
   // Public visitor site (clean, no admin button on dashboard)
   return (
-    <div className="min-h-screen font-sans bg-[#020709] text-slate-100 selection:bg-cyan-500 selection:text-black relative overflow-x-hidden">
-      {/* Full-Screen Modern Tech Pixel Grid Background (Theme Sky/Cyan Color) matching farabial-amin.vercel.app */}
+    <div className="min-h-screen font-sans bg-[#020709] text-slate-100 selection:bg-cyan-500 selection:text-black relative overflow-x-hidden pb-16 lg:pb-0">
+      {/* Full-Screen Modern Tech Pixel Grid Background exactly matching farabial-amin.vercel.app with cyan theme */}
       <div
-        className="fixed inset-0 pointer-events-none z-0"
+        className="fixed inset-0 pointer-events-none z-0 cyan-ambient-texture"
         aria-hidden="true"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(6, 182, 212, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(6, 182, 212, 0.08) 1px, transparent 1px)
-          `,
-          backgroundSize: '72px 72px',
-          maskImage: 'radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%)',
-        }}
       />
-      {/* Ambient glowing radial spotlights behind grid */}
-      <div className="fixed top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
-      <div className="fixed top-1/2 right-1/4 w-[600px] h-[600px] bg-teal-500/8 rounded-full blur-[180px] pointer-events-none -z-10" />
-      <div className="fixed bottom-0 left-1/3 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
+      {/* Ambient glowing radial spotlights behind grid (no dark vignette to prevent blacking out grid) */}
+      <div className="fixed top-[-80px] left-1/2 -translate-x-1/2 w-[750px] h-[550px] bg-cyan-500/12 rounded-full blur-[170px] pointer-events-none -z-10" />
+      <div className="fixed top-1/2 right-1/4 w-[550px] h-[550px] bg-teal-500/8 rounded-full blur-[180px] pointer-events-none -z-10" />
+      <div className="fixed bottom-0 left-1/3 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       {/* Navigation Bar */}
       <Navbar
@@ -235,17 +226,23 @@ Selected Projects:
         onOpenAdmin={handleOpenAdmin}
       />
 
-      {/* Background Rising Profile Portrait (Natural, grand, seamless, NO BOX or border artifact) */}
+      {/* Background Rising Profile Portrait (With exact screenshot grid directly layered behind it) */}
       <div
         id="persistent-project-portrait"
         aria-hidden="true"
-        className={`fixed inset-0 pointer-events-none z-10 flex items-end justify-center select-none transition-all duration-700 ease-out ${
+        className={`fixed inset-0 pointer-events-none z-10 flex items-end justify-center select-none transition-opacity duration-700 ease-in-out ${
           showProjectPortrait
-            ? 'opacity-100 translate-y-0 scale-100'
-            : 'opacity-0 translate-y-28 scale-95 pointer-events-none'
+            ? 'opacity-90 pointer-events-none'
+            : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="relative flex items-end justify-center w-full max-w-5xl px-4 pointer-events-none">
+        {/* Exact Grid matching user screenshot directly behind this photo */}
+        <div className="absolute inset-0 pointer-events-none project-screenshot-grid" />
+
+        {/* Ambient cyan backlight right behind the silhouette */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="relative flex items-end justify-center w-full max-w-5xl px-4 pointer-events-none z-10">
           <img
             src={customization.profileImage || '/osman_exact_nobg.png'}
             alt="Osman Goni Profile"
@@ -255,7 +252,7 @@ Selected Projects:
                 target.src = '/osman_exact_nobg.png';
               }
             }}
-            className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom brightness-110 contrast-105"
+            className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom brightness-[0.90] contrast-100"
             style={{
               maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
               WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
@@ -272,6 +269,11 @@ Selected Projects:
           lang={lang}
           onUpdateCustomization={handleSaveCustomization}
         />
+
+        {/* Software & Tools Marquee - positioned as a bridge visible from both Home and My Projects */}
+        <div id="software-tools-bridge" className="-mt-4 sm:-mt-8 mb-6 sm:mb-10 relative z-30">
+          <SoftwareToolsMarquee lang={lang} />
+        </div>
 
         {/* My Projects Section with dynamic video & design timing and items */}
         <MyProjectsSection
@@ -309,6 +311,12 @@ Selected Projects:
         customization={customization}
         lang={lang}
         onDownloadCV={handleDownloadCV}
+        onNavigate={handleNavigate}
+      />
+
+      {/* Mobile Sticky Bottom Navigation (Home, Projects, Skills, Education, Contact) */}
+      <MobileBottomNav
+        lang={lang}
         onNavigate={handleNavigate}
       />
     </div>

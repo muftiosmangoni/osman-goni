@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Instagram, Facebook, Linkedin, Download, Send, ArrowUp } from 'lucide-react';
+import { Mail, Phone, Instagram, Facebook, Linkedin, Download, Send, ArrowUp, Youtube } from 'lucide-react';
 import { PortfolioCustomization } from '../types';
 
 interface FooterProps {
@@ -84,31 +84,13 @@ export const Footer: React.FC<FooterProps> = ({
             </button>
           </div>
 
-          {/* Social Links including Telegram, LinkedIn, Facebook, Instagram */}
-          <div className="flex items-center gap-2.5">
-            <a
-              href={customization.linkedInUrl || 'https://www.linkedin.com/in/osman-goni100'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-[#0a66c2]/35 transition-all duration-300"
-              title="LinkedIn Profile"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a
-              href={customization.telegramUrl || `https://t.me/+88${customization.phone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-sky-400 hover:bg-sky-400 hover:text-black hover:scale-110 hover:shadow-lg hover:shadow-sky-400/30 transition-all duration-300"
-              title="Telegram (01410401898)"
-            >
-              <Send className="w-4 h-4" />
-            </a>
+          {/* Social Links including Facebook, Instagram, YouTube, LinkedIn, Telegram */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <a
               href={customization.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-blue-400 hover:bg-cyan-500 hover:text-black hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white hover:border-blue-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(59,130,246,0.85)] transition-all duration-300"
               title="Facebook"
             >
               <Facebook className="w-4 h-4" />
@@ -117,14 +99,41 @@ export const Footer: React.FC<FooterProps> = ({
               href={customization.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-pink-400 hover:bg-cyan-500 hover:text-black hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-pink-400 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-500 hover:text-white hover:border-pink-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(236,72,153,0.85)] transition-all duration-300"
               title="Instagram"
             >
               <Instagram className="w-4 h-4" />
             </a>
+            <a
+              href={customization.youtubeUrl || 'https://www.youtube.com/@GoniEditor'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-red-500 hover:bg-red-600 hover:text-white hover:border-red-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(239,68,68,0.85)] transition-all duration-300"
+              title="YouTube (@GoniEditor)"
+            >
+              <Youtube className="w-4 h-4" />
+            </a>
+            <a
+              href={customization.linkedInUrl || 'https://www.linkedin.com/in/osman-goni100'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white hover:border-blue-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(10,102,194,0.85)] transition-all duration-300"
+              title="LinkedIn Profile"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href={customization.telegramUrl || `https://t.me/+88${customization.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-sky-400 hover:bg-sky-400 hover:text-black hover:border-sky-300 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(56,189,248,0.85)] transition-all duration-300"
+              title="Telegram (01410401898)"
+            >
+              <Send className="w-4 h-4" />
+            </a>
             <button
               onClick={scrollToTop}
-              className="w-8 h-8 rounded-lg bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-cyan-400 hover:bg-cyan-500 hover:text-black hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 cursor-pointer"
+              className="w-9 h-9 rounded-xl bg-[#071d2b] border border-[#14405d] flex items-center justify-center text-cyan-400 hover:bg-cyan-400 hover:text-black hover:border-cyan-300 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(6,182,212,0.85)] transition-all duration-300 cursor-pointer"
               title="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />

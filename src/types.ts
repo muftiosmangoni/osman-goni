@@ -81,6 +81,7 @@ export interface PortfolioCustomization {
   instagramUrl: string;
   telegramUrl?: string;
   linkedInUrl?: string;
+  youtubeUrl?: string;
   footerBioEn?: string;
   footerBioBn?: string;
   copyrightNotice?: string;

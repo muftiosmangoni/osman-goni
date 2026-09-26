@@ -1223,6 +1223,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                     className="w-full px-3 py-2 rounded-xl bg-[#020b12] border border-[#0f344e] text-xs text-white focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">YouTube Channel Link</label>
+                  <input
+                    type="text"
+                    value={formData.youtubeUrl || ''}
+                    onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
+                    placeholder="https://www.youtube.com/@GoniEditor"
+                    className="w-full px-3 py-2 rounded-xl bg-[#020b12] border border-[#0f344e] text-xs text-white focus:border-cyan-400 focus:outline-none"
+                  />
+                </div>
               </div>
             </div>
           )}

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Play, Send, Camera, Sparkles, Check } from 'lucide-react';
+import { Play, Send, Camera, Sparkles, Check, Facebook, Instagram, Youtube } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PortfolioCustomization } from '../types';
 import { compressImageFile } from '../utils/storage';
+import { TypewriterRole } from './TypewriterRole';
+import { SoftwareToolsMarquee } from './SoftwareToolsMarquee';
 
 interface HeroProps {
   customization: PortfolioCustomization;
@@ -41,48 +43,20 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="hero" className="relative pt-20 pb-10 sm:pt-28 sm:pb-16 md:pt-36 md:pb-24 overflow-hidden bg-[#020709]">
-      {/* Radial backlight glow behind the user portrait matching screenshot */}
-      <div className="absolute top-1/3 right-1/4 w-[550px] h-[550px] bg-cyan-500/20 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse duration-1000" />
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-teal-500/15 rounded-full blur-[130px] pointer-events-none -z-10" />
-
-      {/* Subtle background tech grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.035] pointer-events-none -z-10"
-        style={{
-          backgroundImage: `linear-gradient(#22d3ee 1px, transparent 1px), linear-gradient(to right, #22d3ee 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}
-      />
+    <section id="hero" className="relative pt-20 pb-8 sm:pt-28 sm:pb-12 md:pt-36 md:pb-16 overflow-hidden bg-transparent">
+      {/* Radial backlight glow behind the user portrait matching theme */}
+      <div className="absolute top-1/3 right-1/4 w-[550px] h-[550px] bg-cyan-500/15 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse duration-1000" />
+      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-teal-500/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           
           {/* Left Hero Column: Typography exactly matching screenshot */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left z-10 w-full">
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left z-10 w-full">
             
-            {/* Top Pill Badge matching screenshot: ✨ CREATIVE VISUALIZER | VIDEO EDITOR */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase mb-3 sm:mb-5 border shadow-sm bg-[#061924] border-[#103b54] text-cyan-300">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span>CREATIVE VISUALIZER &nbsp;|&nbsp; VIDEO EDITOR</span>
-            </div>
-
-            {/* Greeting in English as in Screenshot 3: Assalamu Alaikum, I am */}
-            <p className="text-sm sm:text-lg font-medium text-slate-300 tracking-wide mb-1">
-              Assalamu Alaikum, I am
-            </p>
-
-            {/* Main Name Heading: Osman (white) Goni (cyan gradient glow) */}
-            <h1 className="text-3xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] sm:leading-[1] mb-2 sm:mb-5">
-              <span className="text-white">Osman</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 drop-shadow-[0_0_25px_rgba(34,211,238,0.45)]">
-                Goni
-              </span>
-            </h1>
-
-            {/* Mobile-Only Circular Profile Avatar (Compact, clean round circle shape) */}
-            <div className="lg:hidden mx-auto my-2.5 relative flex flex-col items-center">
-              <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-teal-300 to-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.45)]">
+            {/* Mobile-Only Circular Profile Avatar AT THE VERY TOP matching Screenshot 3 */}
+            <div className="lg:hidden mx-auto mb-3 sm:mb-4 relative flex flex-col items-center">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-teal-300 to-cyan-500 shadow-[0_0_25px_rgba(6,182,212,0.55)]">
                 <div className="w-full h-full rounded-full overflow-hidden bg-[#04121c] relative">
                   <img
                     src={customization.profileImage || '/osman_exact_nobg.png'}
@@ -112,27 +86,58 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            {/* Sub-headline description matching Screenshot 3 exactly */}
-            <p className="text-[11px] sm:text-base leading-relaxed text-slate-300 max-w-xl mb-3 sm:mb-6">
-              {lang === 'bn'
-                ? (customization.bioBn || customization.taglineBn)
-                : (customization.bioEn || customization.tagline)
-              }
+            {/* Top Pill Badge matching screenshot: ✨ CREATIVE VISUALIZER | VIDEO EDITOR */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase mb-2 sm:mb-4 border shadow-sm bg-[#061924] border-[#103b54] text-cyan-300">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span>CREATIVE VISUALIZER &nbsp;|&nbsp; VIDEO EDITOR</span>
+            </div>
+
+            {/* Greeting directly below photo */}
+            <p className="text-xs sm:text-base md:text-lg font-medium text-slate-300 tracking-wide mb-0.5 sm:mb-1">
+              {lang === 'bn' ? 'আসসালামু আলাইকুম, I am' : 'Assalamu Alaikum, I am'}
             </p>
 
-            {/* Skill tags row matching Screenshot 3: [Social Media] [Graphic Design] [Motion Design] [Video Editing] [Gen AI] */}
-            <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-8">
+            {/* Main Name Heading: Osman (white) Goni (cyan gradient glow) */}
+            <h1 className="text-3xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] sm:leading-[1] mb-2 sm:mb-3">
+              <span className="text-white">Osman</span>{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 drop-shadow-[0_0_25px_rgba(34,211,238,0.45)]">
+                Goni
+              </span>
+            </h1>
+
+            {/* Smooth Continuous Typewriter Text Animation: "I am " + video editing focus first, then graphics, then digital marketing */}
+            <div className="mb-3 sm:mb-5">
+              <TypewriterRole
+                prefix="I am "
+                strings={[
+                  'a Video Editor & Visualizer',
+                  'a Motion Graphics & UI Animator',
+                  'a VFX & Cinematic Video Artist',
+                  'an AI Video Creator & Editor',
+                  'a Creative Graphic Designer',
+                  'a Thumbnail & Brand Designer',
+                  'a Meta Ads & Digital Marketer',
+                ]}
+                typingSpeed={65}
+                deletingSpeed={32}
+                pauseDuration={1800}
+                pauseBeforeNext={450}
+              />
+            </div>
+
+            {/* Skill tags row matching Screenshot 3 */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-1 sm:gap-2 mb-3 sm:mb-6">
               {skillPills.map((pill, i) => (
                 <span
                   key={i}
-                  className="px-2 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-xs font-semibold bg-[#051622] border border-[#113954] text-slate-300 hover:text-cyan-300 hover:border-cyan-400 transition-all cursor-default"
+                  className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-xs font-semibold bg-[#051622] border border-[#113954] text-slate-300 hover:text-cyan-300 hover:border-cyan-400 transition-all cursor-default"
                 >
                   {pill}
                 </span>
               ))}
             </div>
 
-            {/* Action Buttons (My Projects & Contact Me) */}
+            {/* Action Buttons (My Projects & Contact Me + Jumping Facebook & Instagram) */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3.5 mb-2.5 sm:mb-4 w-full sm:w-auto">
               <button
                 id="hero-my-projects-btn"
@@ -151,6 +156,48 @@ export const Hero: React.FC<HeroProps> = ({
                 <Send className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
                 <span>{lang === 'bn' ? 'যোগাযোগ করুন' : 'Contact Me'}</span>
               </button>
+
+              {/* Smooth Forward-Lifting Social Icons with Glowing Backlights: Facebook, Instagram, YouTube */}
+              <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-blue-500 rounded-full blur-md opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none -z-10" />
+                  <a
+                    href={customization.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#164366] bg-[#04121c] flex items-center justify-center text-blue-400 hover:text-white hover:bg-blue-600 hover:border-blue-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(59,130,246,0.85)] transition-all duration-300 shadow-md"
+                    title="Facebook Profile"
+                  >
+                    <Facebook className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+                  </a>
+                </div>
+
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-500 rounded-full blur-md opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none -z-10" />
+                  <a
+                    href={customization.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#164366] bg-[#04121c] flex items-center justify-center text-pink-400 hover:text-white hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-500 hover:border-pink-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(236,72,153,0.85)] transition-all duration-300 shadow-md"
+                    title="Instagram Profile"
+                  >
+                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+                  </a>
+                </div>
+
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-red-500 rounded-full blur-md opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none -z-10" />
+                  <a
+                    href={customization.youtubeUrl || 'https://www.youtube.com/@GoniEditor'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#164366] bg-[#04121c] flex items-center justify-center text-red-500 hover:text-white hover:bg-red-600 hover:border-red-400 hover:scale-110 hover:-translate-y-1.5 hover:shadow-[0_0_24px_rgba(239,68,68,0.85)] transition-all duration-300 shadow-md"
+                    title={lang === 'bn' ? 'ইউটিউব চ্যানেল (@GoniEditor)' : 'YouTube Channel (@GoniEditor)'}
+                  >
+                    <Youtube className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* High-Contrast, Glowing, Pulsing, Jumping Availability Badge Placed Directly Below Contact Me */}
@@ -232,7 +279,7 @@ export const Hero: React.FC<HeroProps> = ({
 
           </div>
 
-          {/* Right Column: User Portrait Photo for Desktop (hidden on mobile, visible on lg) */}
+          {/* Right Column: User Portrait Photo for Desktop with previous glowing shape & hover light */}
           <div className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end relative">
             <motion.div
               initial={{ x: 180, opacity: 0, scale: 0.96 }}
@@ -248,16 +295,16 @@ export const Hero: React.FC<HeroProps> = ({
             >
               
               {/* Backlight circular radiant cyan/teal glow behind photo */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/35 via-teal-400/25 to-sky-500/35 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
+              <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/35 via-teal-400/25 to-sky-500/35 rounded-3xl blur-2xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none" />
               
-              {/* Modern Photo Frame Container matching Screenshot 3 */}
-              <div className="relative rounded-3xl p-3 border shadow-2xl bg-gradient-to-b from-[#0e2c40] via-[#051824] to-[#020a10] border-[#14486d] hover:border-cyan-400 hover:shadow-cyan-500/40 transition-all duration-500 group">
+              {/* Modern Photo Frame Container - previous beautiful shape with hover light */}
+              <div className="relative rounded-3xl p-3 border shadow-2xl bg-gradient-to-b from-[#0e2c40] via-[#051824] to-[#020a10] border-[#14486d] hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)] transition-all duration-500 group">
                 
                 {/* Image Box with themed cyan backdrop */}
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-b from-[#083042] via-[#051824] to-[#02080d] border border-[#0f3b57]">
                   
-                  {/* Subtle inner radial cyan glow */}
-                  <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-48 h-48 bg-cyan-400/25 rounded-full blur-3xl pointer-events-none z-0" />
+                  {/* Subtle inner radial cyan glow - বাতি জ্বলা এফেক্ট (glows up on hover) */}
+                  <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-48 h-48 bg-cyan-400/25 group-hover:bg-cyan-400/50 group-hover:scale-125 rounded-full blur-3xl transition-all duration-700 pointer-events-none z-0" />
 
                   <img
                     id="hero-osman-goni-portrait"

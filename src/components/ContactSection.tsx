@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MessageSquare, Instagram, Facebook, Linkedin, Copy, Check, Send, Sparkles, MapPin } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Mail, Phone, MessageSquare, Instagram, Facebook, Linkedin, Copy, Check, Send, Sparkles, MapPin, Youtube } from 'lucide-react';
 import { PortfolioCustomization } from '../types';
 
 interface ContactSectionProps {
@@ -107,16 +107,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
             3. Facebook (with Visit Facebook link)
             4. Instagram (with Visit Instagram link)
         */}
-        {/* Contact Channel Cards: Email, WhatsApp, Telegram, Facebook, Instagram, LinkedIn
-            Rendered as a 2-column grid on mobile (2 cards per row) so it takes minimal vertical scrolling
-        */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 max-w-5xl mx-auto mb-6 sm:mb-8">
+        {/* Contact Channel Cards: Clean 2-column on mobile & balanced grid matching Screenshot 1 */}
+        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
           
-          {/* Card 1: Email Address */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 duration-300">
+          {/* Top Direct 1: Email Address */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-cyan-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(6,182,212,0.5)] duration-300 group cursor-pointer">
             <div>
               <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-cyan-400 shrink-0">
+                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-cyan-400 shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-black transition-all duration-300 shadow-md">
                   <Mail className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                 </div>
                 <button
@@ -130,8 +128,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
               </div>
 
               <div>
-                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
-                  Email
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-cyan-400 transition-colors">
+                  DIRECT EMAIL
                 </h4>
                 <a href={`mailto:${customization.email}`} className="text-[10px] sm:text-xs font-mono text-cyan-400 hover:underline truncate block">
                   {customization.email}
@@ -143,18 +141,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
               <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Official</span>
               <a
                 href={`mailto:${customization.email}`}
-                className="text-[10px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 Send Email →
               </a>
             </div>
           </div>
 
-          {/* Card 2: WhatsApp */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20 duration-300">
+          {/* Card 2: Phone */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(16,185,129,0.5)] duration-300 group cursor-pointer">
             <div>
               <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 shrink-0">
+                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-md">
                   <Phone className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                 </div>
                 <button
@@ -168,8 +166,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
               </div>
 
               <div>
-                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
-                  WhatsApp
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">
+                  DIRECT PHONE
                 </h4>
                 <a href={`tel:${customization.phone}`} className="text-[10px] sm:text-xs font-mono text-emerald-400 hover:underline truncate block">
                   {customization.phone}
@@ -178,48 +176,56 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
             </div>
 
             <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Call</span>
+              <a
+                href={`tel:${customization.phone}`}
+                className="text-[10px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+              >
+                Call Now →
+              </a>
+            </div>
+          </div>
+
+          {/* Social Row 1: WhatsApp & Telegram */}
+          {/* Card 3: WhatsApp */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-emerald-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(16,185,129,0.5)] duration-300 group cursor-pointer">
+            <div>
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-emerald-400 mb-2 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-md">
+                <Phone className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              </div>
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">
+                WhatsApp
+              </h4>
+              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
+                {customization.phone}
+              </p>
+            </div>
+
+            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
               <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Chat</span>
               <a
                 href={`https://wa.me/88${customization.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 WhatsApp →
               </a>
             </div>
           </div>
 
-          {/* Card 3: Telegram (Requested by User) */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-sky-400 hover:shadow-lg hover:shadow-sky-500/20 duration-300">
+          {/* Card 4: Telegram */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-sky-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(56,189,248,0.5)] duration-300 group cursor-pointer">
             <div>
-              <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-sky-400 shrink-0">
-                  <Send className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
-                </div>
-                <button
-                  onClick={() => handleCopy(customization.phone, 'telegram')}
-                  className="px-1.5 py-0.5 sm:p-1.5 rounded-lg border border-sky-500/30 text-sky-400 hover:bg-sky-500/10 text-[9px] sm:text-xs flex items-center gap-1 font-mono hover:scale-105 active:scale-95 transition-all"
-                  title="Copy telegram"
-                >
-                  {copiedType === 'telegram' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  <span className="hidden sm:inline">Copy</span>
-                </button>
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-sky-400 mb-2 group-hover:scale-110 group-hover:bg-sky-400 group-hover:text-black transition-all duration-300 shadow-md">
+                <Send className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
               </div>
-
-              <div>
-                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
-                  Telegram
-                </h4>
-                <a 
-                  href={customization.telegramUrl || `https://t.me/+88${customization.phone}`}
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className="text-[10px] sm:text-xs font-mono text-sky-400 hover:underline truncate block"
-                >
-                  {customization.phone}
-                </a>
-              </div>
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-sky-400 transition-colors">
+                Telegram
+              </h4>
+              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
+                {customization.phone}
+              </p>
             </div>
 
             <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
@@ -228,20 +234,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 href={customization.telegramUrl || `https://t.me/+88${customization.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 Telegram →
               </a>
             </div>
           </div>
 
-          {/* Card 4: Facebook */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/20 duration-300">
+          {/* Social Row 1: Facebook & YouTube */}
+          {/* Card: Facebook */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-blue-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] duration-300 group cursor-pointer">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-blue-400 mb-2">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-blue-400 mb-2 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-300 transition-all duration-300 shadow-md">
                 <Facebook className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
               </div>
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-blue-400 transition-colors">
                 Facebook
               </h4>
               <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
@@ -255,20 +262,48 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 href={customization.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 Facebook →
               </a>
             </div>
           </div>
 
-          {/* Card 5: Instagram */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-pink-400 hover:shadow-lg hover:shadow-pink-500/20 duration-300">
+          {/* Card: YouTube */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-red-500 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(239,68,68,0.5)] duration-300 group cursor-pointer">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-pink-400 mb-2">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-red-500 mb-2 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-400 transition-all duration-300 shadow-md">
+                <Youtube className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+              </div>
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-red-400 transition-colors">
+                YouTube
+              </h4>
+              <p className="text-[9.5px] sm:text-xs text-slate-400 truncate font-mono">
+                @GoniEditor
+              </p>
+            </div>
+
+            <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0e2a3c] flex items-center justify-between">
+              <span className="text-[9px] sm:text-[11px] text-slate-500 hidden sm:inline">Channel</span>
+              <a
+                href={customization.youtubeUrl || 'https://www.youtube.com/@GoniEditor'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] sm:text-xs font-semibold text-red-400 hover:text-red-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
+              >
+                Go to YouTube →
+              </a>
+            </div>
+          </div>
+
+          {/* Social Row 2: Instagram and LinkedIn directly together in the center matching user instruction */}
+          {/* Card: Instagram */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-pink-400 hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(236,72,153,0.5)] duration-300 group cursor-pointer">
+            <div>
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-pink-400 mb-2 group-hover:scale-110 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-pink-500 group-hover:to-purple-500 group-hover:text-white group-hover:border-pink-300 transition-all duration-300 shadow-md">
                 <Instagram className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
               </div>
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-pink-400 transition-colors">
                 Instagram
               </h4>
               <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
@@ -282,20 +317,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 href={customization.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-pink-400 hover:text-pink-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 Instagram →
               </a>
             </div>
           </div>
 
-          {/* Card 6: LinkedIn */}
-          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-[#0a66c2] hover:shadow-lg hover:shadow-[#0a66c2]/25 duration-300">
+          {/* Card: LinkedIn (Positioned directly beside/under Instagram, centered and balanced) */}
+          <div className="p-3 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col justify-between transition-all bg-[#05141e] border-[#113146] hover:border-[#0a66c2] hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-[0_0_28px_rgba(10,102,194,0.5)] duration-300 group cursor-pointer">
             <div>
-              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-[#0a66c2] mb-2">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#082233] border border-[#134466] flex items-center justify-center text-[#0a66c2] mb-2 group-hover:scale-110 group-hover:bg-[#0a66c2] group-hover:text-white group-hover:border-blue-300 transition-all duration-300 shadow-md">
                 <Linkedin className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
               </div>
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white">
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#0a66c2] transition-colors">
                 LinkedIn
               </h4>
               <p className="text-[9.5px] sm:text-xs text-slate-400 truncate">
@@ -309,14 +344,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
                 href={customization.linkedInUrl || 'https://www.linkedin.com/in/osman-goni100'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] sm:text-xs font-semibold text-[#0a66c2] hover:text-sky-300 flex items-center gap-1 hover:translate-x-0.5 transition-transform"
+                className="text-[10px] sm:text-xs font-semibold text-[#0a66c2] hover:text-sky-300 flex items-center gap-1 hover:translate-x-1 transition-transform"
               >
                 LinkedIn →
               </a>
             </div>
           </div>
-
-        </div>
 
         </div>
 
@@ -365,7 +398,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ customization, l
           </div>
         </div>
 
-      </section>
-    
+      </div>
+    </section>
   );
 };
