@@ -146,7 +146,21 @@ export async function loadCustomization(): Promise<PortfolioCustomization> {
       if (p.image && (p.image.includes('zn-Qd-U.jpg') || p.image.includes('0w-OVi.jpg'))) {
         return { ...p, image: 'https://i.postimg.cc/tC8JY1WP/osman-goni-3646-Ae.jpg' };
       }
+      if (p.id === 'design-17-islamic-event-poster') {
+        return { ...p, id: 'design-17-chips-packaging' };
+      }
       return p;
+    });
+
+    // Ensure order strictly follows DESIGN_PROJECTS (Posters -> Thumbnails -> Banners -> Graphics -> Packaging at end)
+    const canonicalOrder = DESIGN_PROJECTS.map((d) => d.id);
+    cleanedDesignProjects.sort((a: any, b: any) => {
+      const idxA = canonicalOrder.indexOf(a.id);
+      const idxB = canonicalOrder.indexOf(b.id);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
+      return 0;
     });
   }
 

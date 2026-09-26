@@ -18,7 +18,7 @@ export interface DesignProject {
   id: string;
   title: string;
   titleBn?: string;
-  category: 'ad-creative' | 'poster' | 'thumbnail' | 'typography';
+  category: 'ad-creative' | 'poster' | 'thumbnail' | 'typography' | 'packaging';
   categoryLabel: string;
   categoryLabelBn?: string;
   image: string;

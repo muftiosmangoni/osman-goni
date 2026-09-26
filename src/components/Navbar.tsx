@@ -45,15 +45,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Brand Logo matching screenshot */}
+          {/* Brand Logo with User Profile Photo inside small circle */}
           <button
             id="brand-logo-btn"
             onClick={() => onNavigate('hero')}
             className="flex items-center gap-3 text-left group cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 via-teal-400 to-sky-400 p-[1.5px] flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-400/40 group-hover:scale-105 transition-all">
-              <div className="w-full h-full rounded-full flex items-center justify-center bg-[#040e16]">
-                <span className="font-extrabold text-cyan-400 text-xs font-mono tracking-wider">OG</span>
+              <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-[#040e16]">
+                <img
+                  src={customization.profileImage || 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg'}
+                  alt={customization.name}
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.includes('0w-OVi.jpg')) {
+                      target.src = 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg';
+                    }
+                  }}
+                />
               </div>
             </div>
             <div>

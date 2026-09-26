@@ -377,15 +377,15 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                     : 'bg-white border-slate-200 active:border-cyan-400'
                 }`}
               >
-                {/* Full-width aspect-video Video Preview */}
-                <div className="relative aspect-video w-full overflow-hidden bg-black flex items-center justify-center">
+                {/* Full-width aspect-video Video Preview with object-contain to prevent cropping */}
+                <div className="relative aspect-video w-full overflow-hidden bg-[#020709] flex items-center justify-center">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
                     loading="lazy"
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain transform group-hover:scale-102 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
 
                   {/* Centered Glowing Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -492,15 +492,15 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                               : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                           }`}
                         >
-                          {/* Standard YouTube / Facebook Landscape Video Shape (aspect-video) for ALL cards */}
-                          <div className="relative aspect-video overflow-hidden bg-black flex items-center justify-center">
+                          {/* Standard YouTube / Facebook Landscape Video Shape (aspect-video) with object-contain to prevent cropping */}
+                          <div className="relative aspect-video overflow-hidden bg-[#020709] flex items-center justify-center">
                             <img
                               src={video.thumbnail}
                               alt={video.title}
                               loading="lazy"
-                              className="w-full h-full object-cover transform group-hover:scale-108 transition-transform duration-500 ease-out"
+                              className="w-full h-full object-contain transform group-hover:scale-102 transition-transform duration-500 ease-out"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 group-hover:from-black/60 transition-all" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
 
                             <div className="absolute inset-0 flex items-center justify-center">
                               <div className="w-8 h-8 sm:w-13 sm:h-13 rounded-full bg-cyan-500/90 text-black flex items-center justify-center shadow-lg shadow-cyan-500/50 transform group-hover:scale-110 group-hover:bg-cyan-400 transition-all duration-300">
@@ -613,15 +613,15 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                         : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                     }`}
                   >
-                    {/* Standard YouTube Video Shape for All cards */}
-                    <div className="relative aspect-video overflow-hidden bg-black flex items-center justify-center">
+                    {/* Standard YouTube Video Shape for All cards with object-contain */}
+                    <div className="relative aspect-video overflow-hidden bg-[#020709] flex items-center justify-center">
                       <img
                         src={video.thumbnail}
                         alt={video.title}
                         loading="lazy"
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                        className="w-full h-full object-contain transform group-hover:scale-102 transition-transform duration-500 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 group-hover:from-black/70 transition-all" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
 
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-14 h-14 rounded-full bg-cyan-500/90 text-black flex items-center justify-center shadow-lg shadow-cyan-500/50 transform group-hover:scale-110 group-hover:bg-cyan-400 transition-all duration-300">
@@ -760,59 +760,30 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                       : 'bg-white border-slate-200 active:border-cyan-400'
                   }`}
                 >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
+                  {/* Image Box - full composition visible without cropping (object-contain) */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#020b12] flex items-center justify-center p-2.5">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt="Photoshop Design"
                       loading="lazy"
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20" />
 
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                       <span className="px-3 py-1.5 rounded-full bg-cyan-500/90 text-black text-xs font-bold font-mono flex items-center gap-1.5 shadow-xl shadow-cyan-500/50">
                         <Maximize2 className="w-3.5 h-3.5" />
                         <span>{lang === 'bn' ? 'বড় করে দেখুন' : 'Full Preview'}</span>
                       </span>
                     </div>
-
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-cyan-300">
-                      {lang === 'bn' && item.categoryLabelBn ? item.categoryLabelBn : item.categoryLabel}
-                    </span>
-
-                    <span className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded bg-black/90 text-[10px] font-mono text-slate-300 border border-white/10">
-                      #{idx + 1}
-                    </span>
                   </div>
 
-                  <div className={`p-3.5 flex flex-col justify-between border-t ${
+                  {/* Card Footer: "Photoshop • Illustrator" */}
+                  <div className={`py-2 px-3 flex items-center justify-center border-t ${
                     isDark ? 'border-[#0e2738] bg-[#040e16]' : 'border-slate-100 bg-slate-50'
                   }`}>
-                    <div>
-                      <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                        <span className="font-mono text-cyan-400 font-bold">{item.client || 'Osman Goni'}</span>
-                        <span className="text-[10px] font-mono uppercase">{item.dimensions}</span>
-                      </div>
-                      <h3 className={`text-sm font-bold line-clamp-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                        {lang === 'bn' && item.titleBn ? item.titleBn : item.title}
-                      </h3>
-                      {item.description && (
-                        <p className={`text-xs mt-1 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2.5 border-t border-[#0e2738]/70">
-                      {item.toolsUsed?.map((tool) => (
-                        <span
-                          key={tool}
-                          className="px-2 py-0.5 rounded bg-[#081d2c] border border-[#133c57] text-[9.5px] text-cyan-300 font-mono"
-                        >
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
+                    <span className="text-xs sm:text-sm font-bold tracking-wider font-mono text-cyan-300">
+                      Photoshop • Illustrator
+                    </span>
                   </div>
                 </div>
               ))}
@@ -866,21 +837,20 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                         <div
                           id={`carousel-design-card-${item.id}-${idx}`}
                           onClick={() => setSelectedDesign(item)}
-                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
+                          className={`h-full rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1.5 ${
                             isDark
                               ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                               : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                           }`}
                         >
-                          {/* Image Box - balanced 4:3 display for graphic design showcase */}
-                          <div className="relative aspect-[4/3] overflow-hidden bg-black flex items-center justify-center">
+                          {/* Image Box - full composition visible without cropping (object-contain) */}
+                          <div className="relative aspect-[4/3] overflow-hidden bg-[#020b12] flex items-center justify-center p-2.5 sm:p-3">
                             <img
                               src={item.image}
-                              alt={item.title}
+                              alt="Photoshop Design"
                               loading="lazy"
-                              className="w-full h-full object-cover transform group-hover:scale-108 transition-transform duration-500 ease-out"
+                              className="w-full h-full object-contain"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/30 group-hover:from-black/60 transition-all" />
 
                             {/* Hover overlay hint */}
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -889,54 +859,15 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                                 <span>{lang === 'bn' ? 'বড় করে দেখুন' : 'Full Preview'}</span>
                               </span>
                             </div>
-
-                            {/* Category Badge */}
-                            <span className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 px-1.5 py-0.5 sm:px-2.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[9px] sm:text-[10px] font-mono text-cyan-300">
-                              {lang === 'bn' && item.categoryLabelBn ? item.categoryLabelBn : item.categoryLabel}
-                            </span>
-
-                            {/* Position indicator */}
-                            <span className="absolute bottom-1.5 right-1.5 sm:bottom-2.5 sm:right-2.5 px-1.5 py-0.5 rounded bg-black/85 text-[9px] sm:text-[10px] font-mono text-slate-300 border border-white/10">
-                              {(idx % filteredDesigns.length) + 1} / {filteredDesigns.length}
-                            </span>
                           </div>
 
-                          {/* Card Footer Details */}
-                          <div className={`p-2 sm:p-3.5 flex flex-col justify-between flex-grow border-t ${
+                          {/* Card Footer: "Photoshop • Illustrator" */}
+                          <div className={`py-2.5 px-3 flex items-center justify-center border-t ${
                             isDark ? 'border-[#0e2738] bg-[#040e16]' : 'border-slate-100 bg-slate-50'
                           }`}>
-                            <div>
-                              <div className="flex items-center justify-between text-[10px] sm:text-xs text-slate-400 mb-0.5 sm:mb-1">
-                                <span className="font-mono text-cyan-400 text-[10px] sm:text-[11px] font-semibold truncate max-w-[80px] sm:max-w-[140px]">
-                                  {item.client || 'Osman Goni'}
-                                </span>
-                                <span className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase">{item.dimensions}</span>
-                              </div>
-                              <h3 className={`text-[11px] sm:text-sm font-bold line-clamp-1 group-hover:text-cyan-400 transition-colors ${
-                                isDark ? 'text-white' : 'text-slate-900'
-                              }`}>
-                                {lang === 'bn' && item.titleBn ? item.titleBn : item.title}
-                              </h3>
-                              <p className={`hidden sm:block text-[11px] mt-1 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                                {item.description}
-                              </p>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-2.5 border-t border-[#0d2231]">
-                              <div className="hidden md:flex flex-wrap items-center gap-1">
-                                {item.toolsUsed?.map((tool) => (
-                                  <span
-                                    key={tool}
-                                    className="px-1.5 py-0.5 rounded bg-[#081d2c] border border-[#133c57] text-[9px] text-cyan-300 font-mono"
-                                  >
-                                    {tool}
-                                  </span>
-                                ))}
-                              </div>
-                              <span className="text-[10px] text-cyan-400 font-mono flex items-center gap-1 group-hover:underline">
-                                {lang === 'bn' ? 'প্রিভিউ' : 'View'}
-                              </span>
-                            </div>
+                            <span className="text-xs sm:text-sm font-bold tracking-wider font-mono text-cyan-300">
+                              Photoshop • Illustrator
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -980,52 +911,29 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
                     key={item.id}
                     id={`grid-design-card-${item.id}`}
                     onClick={() => setSelectedDesign(item)}
-                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.035] hover:-translate-y-2.5 ${
+                    className={`rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1.5 ${
                       isDark
                         ? 'bg-[#05141e] border-[#113146] hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.55)]'
                         : 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-cyan-100'
                     }`}
                   >
-                    <div className="relative aspect-[4/3] overflow-hidden bg-black flex items-center justify-center">
+                    {/* Image Box - full composition visible without cropping (object-contain) */}
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#020b12] flex items-center justify-center p-2.5">
                       <img
                         src={item.image}
-                        alt={item.title}
+                        alt="Photoshop Design"
                         loading="lazy"
-                        className="w-full h-full object-cover transform group-hover:scale-108 transition-transform duration-500 ease-out"
+                        className="w-full h-full object-contain"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
-
-                      <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[9px] font-mono text-cyan-300">
-                        {lang === 'bn' && item.categoryLabelBn ? item.categoryLabelBn : item.categoryLabel}
-                      </span>
-
-                      <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/85 text-[9px] font-mono text-slate-300 border border-white/10">
-                        #{idx + 1}
-                      </span>
                     </div>
 
-                    <div className={`p-3.5 flex flex-col justify-between flex-grow border-t ${
+                    {/* Card Footer: "Photoshop • Illustrator" */}
+                    <div className={`py-2.5 px-3 flex items-center justify-center border-t ${
                       isDark ? 'border-[#0e2738] bg-[#040e16]' : 'border-slate-100 bg-slate-50'
                     }`}>
-                      <div>
-                        <h3 className={`text-xs font-bold line-clamp-1 group-hover:text-cyan-400 transition-colors ${
-                          isDark ? 'text-white' : 'text-slate-900'
-                        }`}>
-                          {lang === 'bn' && item.titleBn ? item.titleBn : item.title}
-                        </h3>
-                        <p className={`text-[10px] mt-0.5 text-slate-400 font-mono`}>
-                          {item.dimensions}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-[#0d2231]">
-                        <span className="text-[10px] text-cyan-400 font-mono truncate max-w-[120px]">
-                          {item.client || 'Osman Goni (3646)'}
-                        </span>
-                        <span className="text-[10px] text-cyan-400 font-mono">
-                          {lang === 'bn' ? 'ওপেন' : 'Open'}
-                        </span>
-                      </div>
+                      <span className="text-xs sm:text-sm font-bold tracking-wider font-mono text-cyan-300">
+                        Photoshop • Illustrator
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -1150,12 +1058,12 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
             className="relative w-full max-w-4xl bg-[#040e15] border border-cyan-500/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[94vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
+            {/* Modal Header: Clean and focused on "Photoshop • Illustrator" */}
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#0f293b] bg-[#030a0f]">
               <div className="flex items-center gap-2 overflow-hidden pr-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
-                <span className="text-xs sm:text-sm font-bold text-white font-mono truncate">
-                  {lang === 'bn' && selectedDesign.titleBn ? selectedDesign.titleBn : selectedDesign.title}
+                <span className="text-xs sm:text-sm font-bold text-white font-mono tracking-wider">
+                  Photoshop • Illustrator
                 </span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -1169,42 +1077,26 @@ export const MyProjectsSection: React.FC<MyProjectsSectionProps> = ({
               </div>
             </div>
 
-            {/* High Definition Image Display */}
-            <div className="relative flex-1 min-h-[300px] max-h-[68vh] overflow-auto bg-black flex items-center justify-center p-3">
+            {/* High Definition Image Display - full composition, zero cropping */}
+            <div className="relative flex-1 min-h-[300px] max-h-[75vh] overflow-auto bg-[#020609] flex items-center justify-center p-3 sm:p-6">
               <img
                 src={selectedDesign.image}
-                alt={selectedDesign.title}
-                className="max-h-[64vh] max-w-full object-contain rounded-xl shadow-2xl"
+                alt="Photoshop Design"
+                className="max-h-[70vh] max-w-full object-contain rounded-xl shadow-2xl"
               />
             </div>
 
-            {/* Modal Footer with metadata */}
-            <div className="p-4 bg-[#030d14] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs border-t border-[#0d2332]">
-              <div className="space-y-1">
-                <p className="text-slate-200 text-xs sm:text-sm font-medium">{selectedDesign.description}</p>
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="px-2 py-0.5 rounded-md bg-[#0e273a] border border-[#174669] text-[10px] text-cyan-300 font-mono font-bold">
-                    {selectedDesign.categoryLabel}
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-black/60 border border-white/10 text-[10px] text-slate-300 font-mono">
-                    {selectedDesign.dimensions}
-                  </span>
-                  {selectedDesign.toolsUsed?.map((tool) => (
-                    <span
-                      key={tool}
-                      className="px-2 py-0.5 rounded-md bg-[#092233] border border-[#133c57] text-[10px] text-teal-300 font-mono"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[11px] px-2.5 py-1 rounded-lg bg-cyan-950 border border-cyan-700 text-cyan-300 font-mono font-bold">
-                  {selectedDesign.client || 'Osman Goni (3646)'}
-                </span>
-              </div>
+            {/* Modal Footer: Clean and minimal */}
+            <div className="p-3.5 bg-[#030d14] flex items-center justify-between text-xs border-t border-[#0d2332]">
+              <span className="text-cyan-300 font-mono font-bold text-xs tracking-wider">
+                Photoshop • Illustrator
+              </span>
+              <button
+                onClick={() => setSelectedDesign(null)}
+                className="px-3 py-1 rounded-lg bg-cyan-950 border border-cyan-700 text-cyan-300 text-xs font-mono font-bold hover:bg-cyan-900 transition-colors cursor-pointer"
+              >
+                {lang === 'bn' ? 'বন্ধ করুন' : 'Close'}
+              </button>
             </div>
           </div>
         </div>

@@ -226,21 +226,29 @@ Selected Projects:
         onOpenAdmin={handleOpenAdmin}
       />
 
-      {/* Background Rising Profile Portrait (With exact screenshot grid directly layered behind it) */}
+      {/* Background Rising Profile Portrait (Theme Color & Grid Background, NO solid black) */}
       <div
         id="persistent-project-portrait"
         aria-hidden="true"
         className={`fixed inset-0 pointer-events-none z-10 flex items-end justify-center select-none transition-opacity duration-700 ease-in-out ${
           showProjectPortrait
-            ? 'opacity-90 pointer-events-none'
+            ? 'opacity-95 pointer-events-none'
             : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Exact Grid matching user screenshot directly behind this photo */}
-        <div className="absolute inset-0 pointer-events-none project-screenshot-grid" />
+        {/* Full Theme Color Background layer - rich cyan/teal atmosphere instead of black */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 90% 85% at 50% 65%, rgba(6, 182, 212, 0.32) 0%, rgba(8, 48, 70, 0.80) 40%, rgba(4, 22, 34, 0.95) 75%, rgba(2, 7, 9, 0.99) 100%)',
+          }}
+        />
 
-        {/* Ambient cyan backlight right behind the silhouette */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+        {/* The Exact Theme Cyan Grid ("শেপ শেপ আকারে যে গড়গড় আঁকা আছে") on top of theme color */}
+        <div className="absolute inset-0 pointer-events-none project-screenshot-grid opacity-90" />
+
+        {/* Core luminous cyan backlight centered right behind silhouette */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[780px] h-[650px] bg-cyan-400/25 rounded-full blur-[130px] pointer-events-none" />
 
         <div className="relative flex items-end justify-center w-full max-w-6xl px-4 pointer-events-none z-10">
           <img
@@ -252,8 +260,10 @@ Selected Projects:
                 target.src = 'https://i.postimg.cc/bYmS4LQT/0w-OVi.jpg';
               }
             }}
-            className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom brightness-[0.90] contrast-100"
+            className="w-auto max-h-[85vh] sm:max-h-[90vh] md:max-h-[96vh] object-contain object-bottom"
             style={{
+              mixBlendMode: 'screen',
+              filter: 'brightness(0.92)',
               maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
               WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 98%)',
             }}
